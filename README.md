@@ -9,13 +9,17 @@ stripe
 
 ## Установка ##
 
-1.  git clone https://github.com/abdulhatov/agricultural.git
-2. cd agricultural
+1.  git clone https://github.com/abdulhatov/stripe_payment.git
+2. cd stripe_payment
 
 3. Создать .env
     ### DJANGO SECRET KEY ###
     SECRET_KEY=<django secret key>
-4. 
+    
+    ### STRIPE ###
+    STRIPE_PUBLIC_KEY=<stipe public key>
+    STRIPE_SECRET_KEY=<stirpe secter key>
+
     ### DB POSTGRES ###
     DB_NAME=<Имя БД>
     DB_USER=<Юзер БД>
