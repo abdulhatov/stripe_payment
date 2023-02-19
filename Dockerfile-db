@@ -1,0 +1,9 @@
+FROM postgres:14.1
+
+ENV POSTGRES_DB ${DB_NAME}
+ENV POSTGRES_USER ${DB_USER}
+ENV POSTGRES_PASSWORD ${DB_PASSWORD}
+
+COPY init.sql /docker-entrypoint-initdb.d/
+
+CMD ["/usr/local/bin/docker-entrypoint.sh","postgres"]

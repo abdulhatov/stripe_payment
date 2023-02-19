@@ -1,0 +1,44 @@
+version: "3"
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    restart: always
+    container_name: postgres
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    depends_on:
+      - postgres
+    env_file:
+      - ./.env
+    volumes:
+      - .:/code
+      - static:/code/static
+    expose:
+      - 8000
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    volumes:
+      - static:/code/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static:
